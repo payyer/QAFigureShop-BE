@@ -8,6 +8,7 @@ export interface IUser extends Document {
   isVerified: boolean;
   verificationToken?: string | null;
   verificationTokenExpires?: Date | null;
+  refreshToken?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -25,6 +26,7 @@ const UserSchema: Schema = new Schema(
     isVerified: { type: Boolean, default: false },
     verificationToken: { type: String },
     verificationTokenExpires: { type: Date },
+    refreshToken: { type: String }, // For Refresh Token Rotation
   },
   { timestamps: true },
 );

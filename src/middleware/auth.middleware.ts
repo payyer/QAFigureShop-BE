@@ -24,7 +24,7 @@ export const protect = async (
 
       const decoded = jwt.verify(
         token,
-        process.env.JWT_SECRET || "default_secret_key",
+        process.env.ACCESS_TOKEN_SECRET || "default_access_token_secret",
       ) as unknown as JwtPayload;
 
       const user = await User.findById(decoded.id);
