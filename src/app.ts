@@ -1,5 +1,7 @@
 import express from "express";
 import checkoutRoutes from "./routes/checkout.route.js";
+import authRoutes from "./routes/auth.route.js";
+
 import categoryRoutes from "./routes/category.route.js";
 import brandRoutes from "./routes/brand.route.js";
 import productRoutes from "./routes/product.route.js";
@@ -15,6 +17,7 @@ app.get("/", (req, res) => {
 app.use("/api", checkoutRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/brands", brandRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 
 // Error Middleware luôn nằm cuối
