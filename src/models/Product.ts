@@ -33,6 +33,8 @@ export interface IProduct extends Document {
   metadata: IMetadata;
   variants: IVariant[];
   is_active: boolean;
+  averageRating: number;
+  reviewCount: number;
 }
 
 const variantSchema = new Schema<IVariant>({
@@ -59,6 +61,8 @@ const productSchema = new Schema<IProduct>(
     },
     variants: [variantSchema],
     is_active: { type: Boolean, default: true },
+    averageRating: { type: Number, default: 0, min: 0, max: 5 },
+    reviewCount: { type: Number, default: 0, min: 0 },
   },
   { timestamps: true },
 );
