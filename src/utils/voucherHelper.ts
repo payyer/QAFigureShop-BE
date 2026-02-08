@@ -2,7 +2,11 @@ import { AppError } from "../middleware/appError.js";
 import { VoucherType, type IVoucher } from "../models/Voucher.js";
 
 class VoucherHelper {
-  static calculateDiscount(voucher: IVoucher, subtotal: number) {
+  static calculateDiscount(
+    voucher: IVoucher,
+    subtotal: number,
+    shippingFee: number = 0,
+  ) {
     // 1. Check thời gian (startDate, endDate)
     const today = Date.now();
     const startTime = new Date(voucher.startDate).getTime();
@@ -20,7 +24,9 @@ class VoucherHelper {
     }
     // 3. Tính discount dựa trên type
     let discount = 0;
-    if (voucher.type === VoucherType.FIXED) {
+    if (voucher.type === VoucherType.FREE_SHIP) {
+      discount = shippingFee;
+    } else if (voucher.type === VoucherType.FIXED) {
       discount = voucher.discountValue;
     } else {
       // 4. Nếu type là PERCENT, áp dụng maxDiscountAmount (nếu có)
@@ -33,3 +39,5 @@ class VoucherHelper {
     return discount;
   }
 }
+
+export default VoucherHelper;
